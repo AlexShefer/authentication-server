@@ -16,10 +16,10 @@ mongoose.set("strictQuery", false);
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
-        // listen for requests
         console.log("the database is connected");
     })
     .catch((error) => {
+        console.log("Fail to connect database");
         console.log(error);
     });
 
