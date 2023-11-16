@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 
@@ -10,8 +11,7 @@ const app = express();
 
 // middleware
 mongoose.set("strictQuery", false);
-app.use(express.json());
-app.use(cors());
+
 // connect  db
 mongoose
     .connect(process.env.MONGO_URI)
@@ -23,6 +23,10 @@ mongoose
         console.log(error);
     });
 
+// middleware
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(cors());
 // routes
 app.use("/api/user", userRoutes);
 
